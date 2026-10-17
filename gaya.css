@@ -1,7 +1,7 @@
 /* Halaman informasi Silsilara (beranda & kebijakan privasi) — warna sama dengan aplikasi. */
 :root {
   color-scheme: dark;
-  --latar: #09090b;
+  --latar: #0a0f0e;
   --panel: rgb(255 255 255 / 0.04);
   --garis: rgb(255 255 255 / 0.08);
   --teks: #f4f4f5;
@@ -11,12 +11,12 @@
 @media (prefers-color-scheme: light) {
   :root {
     color-scheme: light;
-    --latar: #f4f4f7;
+    --latar: #f5f2ea;
     --panel: #ffffff;
     --garis: rgb(24 24 27 / 0.08);
     --teks: #18181b;
     --redup: #52525b;
-    --aksen: #0f6e5f;
+    --aksen: #1c6a5b;
   }
 }
 * {
