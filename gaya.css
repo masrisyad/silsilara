@@ -6,7 +6,7 @@
   --garis: rgb(255 255 255 / 0.08);
   --teks: #f4f4f5;
   --redup: #a1a1aa;
-  --aksen: #818cf8;
+  --aksen: #f2b544;
 }
 @media (prefers-color-scheme: light) {
   :root {
@@ -16,7 +16,7 @@
     --garis: rgb(24 24 27 / 0.08);
     --teks: #18181b;
     --redup: #52525b;
-    --aksen: #4f46e5;
+    --aksen: #0f6e5f;
   }
 }
 * {
@@ -34,12 +34,9 @@ main {
   padding: 3rem 1rem 4rem;
 }
 .logo {
-  display: inline-grid;
-  place-items: center;
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 1rem;
-  background: linear-gradient(135deg, #6366f1, #7c3aed);
+  display: block;
+  width: 4rem;
+  height: 4rem;
 }
 h1 {
   margin: 1.25rem 0 0.25rem;
