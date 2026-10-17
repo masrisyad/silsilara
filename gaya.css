@@ -1,0 +1,83 @@
+/* Halaman informasi Silsilara (beranda & kebijakan privasi) — warna sama dengan aplikasi. */
+:root {
+  color-scheme: dark;
+  --latar: #09090b;
+  --panel: rgb(255 255 255 / 0.04);
+  --garis: rgb(255 255 255 / 0.08);
+  --teks: #f4f4f5;
+  --redup: #a1a1aa;
+  --aksen: #818cf8;
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    color-scheme: light;
+    --latar: #f4f4f7;
+    --panel: #ffffff;
+    --garis: rgb(24 24 27 / 0.08);
+    --teks: #18181b;
+    --redup: #52525b;
+    --aksen: #4f46e5;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--latar);
+  color: var(--teks);
+  font: 16px/1.65 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+main {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 3rem 1rem 4rem;
+}
+.logo {
+  display: inline-grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, #6366f1, #7c3aed);
+}
+h1 {
+  margin: 1.25rem 0 0.25rem;
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+h2 {
+  margin: 2.25rem 0 0.5rem;
+  font-size: 1.15rem;
+}
+p,
+li {
+  color: var(--redup);
+}
+strong {
+  color: var(--teks);
+}
+a {
+  color: var(--aksen);
+}
+ul {
+  padding-left: 1.25rem;
+}
+.kartu {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--garis);
+  border-radius: 1rem;
+  background: var(--panel);
+}
+.kecil {
+  font-size: 0.85rem;
+}
+footer {
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--garis);
+  font-size: 0.85rem;
+  color: var(--redup);
+}
