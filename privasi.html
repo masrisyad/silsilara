@@ -12,7 +12,7 @@
     <main>
       <p class="kecil"><a href="./">← Silsilara</a></p>
       <h1>Kebijakan Privasi</h1>
-      <p class="kecil">Berlaku sejak 17 Oktober 2026 · Aplikasi: Silsilara (Android <code>id.silsilara.app</code> dan web)</p>
+      <p class="kecil">Berlaku sejak 18 Oktober 2026 · Aplikasi: Silsilara (Android <code>id.silsilara.app</code> dan web)</p>
 
       <p>
         Kebijakan ini menjelaskan data apa yang diakses Silsilara, untuk apa, dan di mana data itu disimpan. Singkatnya:
@@ -22,11 +22,11 @@
 
       <h2>1. Data dari akun Google Anda</h2>
       <ul>
-        <li><strong>Nama dan alamat email akun Google</strong>, untuk menampilkan akun yang sedang masuk dan mencatat siapa yang terakhir mengubah silsilah.</li>
+        <li><strong>Nama, alamat email, dan foto profil akun Google</strong>, untuk menampilkan akun yang sedang masuk (juga di daftar akun yang punya akses) dan mencatat siapa yang terakhir mengubah silsilah.</li>
         <li>
           <strong>Akses Google Drive</strong> (scope <code>https://www.googleapis.com/auth/drive</code>), untuk: membuat folder
-          <em>Silsilara</em> berisi berkas <code>silsilah.json</code> dan folder foto di Drive Anda; membaca dan memperbarui berkas
-          itu; mengunggah dan memindahkan foto anggota keluarga ke Sampah; menemukan silsilah yang dibagikan anggota keluarga
+          <em>Silsilara</em> berisi berkas <code>silsilah.json</code>, folder foto, dan berkas pengaturan pribadi
+          <code>pengaturan.json</code> di Drive Anda; membaca dan memperbarui berkas-berkas itu; mengunggah dan memindahkan foto anggota keluarga ke Sampah; menemukan silsilah yang dibagikan anggota keluarga
           kepada Anda; serta mengatur siapa saja yang boleh membuka silsilah Anda (fitur Manajemen akun).
         </li>
       </ul>
@@ -34,14 +34,19 @@
 
       <h2>2. Data yang Anda masukkan</h2>
       <p>
-        Nama, nama panggilan, jenis kelamin, tanggal lahir dan wafat, catatan, foto, dan hubungan antaranggota keluarga.
+        Nama, nama panggilan, jenis kelamin, tanggal lahir dan wafat, nomor WhatsApp/HP, foto, dan hubungan antaranggota keluarga.
         Bila Anda menandai diri Anda (fitur "Ini saya"), email akun Google Anda dicatat pada anggota tersebut. Semua data ini
         disimpan di berkas <code>silsilah.json</code> dan folder foto di Google Drive, dan dapat dilihat oleh akun yang Anda beri akses.
+      </p>
+      <p>
+        Nama keluarga yang Anda berikan di Profil adalah versi pribadi Anda: disimpan di berkas <code>pengaturan.json</code>
+        di Google Drive Anda sendiri dan tidak dibagikan ke akun lain.
       </p>
 
       <h2>3. Data yang tersimpan di perangkat</h2>
       <p>
-        Pengaturan seperti tema terang/gelap, silsilah dan kartu terakhir yang dibuka, serta token masuk sementara.
+        Pengaturan seperti tema terang/gelap, bahasa, silsilah dan data terakhir yang dibuka, langkah panduan memulai yang
+        dilewati, tanda "Ini saya" untuk akses Lihat saja, serta token masuk sementara.
         Bila pengingat ulang tahun dinyalakan, daftar nama dan tanggal lahir anggota yang masih hidup disimpan di perangkat
         agar notifikasi bisa muncul tanpa membuka aplikasi. Data ini dihapus saat Anda keluar dari akun atau mematikan pengingat.
       </p>
@@ -51,6 +56,7 @@
         Silsilara <strong>tidak menjual, menyewakan, atau membagikan</strong> data Anda kepada pihak ketiga, dan tidak memakai
         iklan atau analitik. Data hanya dibagikan ke akun Google yang Anda undang sendiri lewat fitur Manajemen akun. Aplikasi
         berkomunikasi langsung dengan layanan Google (Google Drive, Google Sign-In) dan memuat huruf dari Google Fonts.
+        Tombol WhatsApp di kartu anggota membuka <code>wa.me</code> hanya saat Anda mengetuknya.
       </p>
       <p>
         Penggunaan dan pemindahan informasi yang diterima dari Google API oleh Silsilara mematuhi
