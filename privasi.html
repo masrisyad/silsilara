@@ -12,51 +12,69 @@
     <main>
       <p class="kecil"><a href="./">← Silsilara</a> · <a href="privacy.html" lang="en">English</a></p>
       <h1>Kebijakan Privasi</h1>
-      <p class="kecil">Berlaku sejak 18 Oktober 2026 · Aplikasi: Silsilara (Android <code>id.silsilara.app</code> dan web)</p>
+      <p class="kecil">Berlaku sejak 19 Oktober 2026 · Aplikasi: Silsilara (Android <code>id.silsilara.app</code> dan web)</p>
 
       <p>
         Kebijakan ini menjelaskan data apa yang diakses Silsilara, untuk apa, dan di mana data itu disimpan. Singkatnya:
-        <strong>Silsilara tidak memiliki server.</strong> Data silsilah Anda hanya tersimpan di Google Drive akun Anda
-        (dan akun keluarga yang Anda undang), serta sebagian kecil pengaturan di perangkat Anda.
+        <strong>data silsilah dan foto keluarga tersimpan di Google Drive milik pemilik silsilah</strong>, bukan di server kami.
+        Silsilara memiliki <strong>server kecil</strong> yang menghubungkan anggota keluarga yang diundang ke silsilah itu; server
+        hanya menyimpan data yang diperlukan untuk itu (lihat bagian 3), tidak menyimpan isi silsilah atau foto.
       </p>
 
       <h2>1. Data dari akun Google Anda</h2>
       <ul>
         <li><strong>Nama, alamat email, dan foto profil akun Google</strong>, untuk menampilkan akun yang sedang masuk (juga di daftar akun yang punya akses) dan mencatat siapa yang terakhir mengubah silsilah.</li>
         <li>
-          <strong>Akses Google Drive</strong> (scope <code>https://www.googleapis.com/auth/drive</code>), untuk: membuat folder
-          <em>Silsilara</em> berisi berkas <code>silsilah.json</code>, folder foto, dan berkas pengaturan pribadi
-          <code>pengaturan.json</code> di Drive Anda; membaca dan memperbarui berkas-berkas itu; mengunggah dan memindahkan foto anggota keluarga ke Sampah; menemukan silsilah yang dibagikan anggota keluarga
-          kepada Anda; serta mengatur siapa saja yang boleh membuka silsilah Anda (fitur Manajemen akun).
+          <strong>Akses Google Drive terbatas</strong> (scope <code>https://www.googleapis.com/auth/drive.file</code>): Silsilara
+          hanya bisa melihat dan mengubah <strong>berkas yang dibuat oleh Silsilara sendiri</strong>, yaitu folder
+          <em>Silsilara</em> berisi berkas <code>silsilah.json</code> dan folder foto. Izin ini dipakai untuk membuat,
+          membaca, dan memperbarui berkas tersebut, serta mengunggah dan memindahkan foto anggota keluarga ke Sampah.
         </li>
       </ul>
-      <p>Silsilara hanya mengakses berkas-berkas Silsilara tersebut dan tidak membaca, mengubah, atau menghapus berkas lain di Drive Anda.</p>
+      <p>Silsilara tidak dapat melihat, membaca, mengubah, atau menghapus berkas lain di Google Drive Anda.</p>
 
       <h2>2. Data yang Anda masukkan</h2>
       <p>
         Nama, nama panggilan, jenis kelamin, tanggal lahir dan wafat, nomor WhatsApp/HP, foto, dan hubungan antaranggota keluarga.
         Bila Anda menandai diri Anda (fitur "Ini Anda"), email akun Google Anda dicatat pada anggota tersebut. Semua data ini
-        disimpan di berkas <code>silsilah.json</code> dan folder foto di Google Drive, dan dapat dilihat oleh akun yang Anda beri akses.
-      </p>
-      <p>
-        Nama keluarga yang Anda berikan di Profil adalah versi pribadi Anda: disimpan di berkas <code>pengaturan.json</code>
-        di Google Drive Anda sendiri dan tidak dibagikan ke akun lain.
+        disimpan di berkas <code>silsilah.json</code> dan folder foto di <strong>Google Drive pemilik silsilah</strong>, dan dapat
+        dilihat oleh akun yang diberi akses lewat fitur Manajemen akun. Bila Anda anggota yang diundang, perubahan yang Anda
+        buat tersimpan di Google Drive pemilik silsilah.
       </p>
 
-      <h2>3. Data yang tersimpan di perangkat</h2>
+      <h2>3. Data yang disimpan di server Silsilara</h2>
+      <p>
+        Agar anggota keluarga bisa membuka silsilah tanpa memberi izin Google Drive mereka sendiri, server Silsilara membuka
+        berkas Silsilara di Google Drive pemilik atas nama pemilik, setelah memeriksa bahwa akun yang meminta memang punya
+        akses. Untuk itu server menyimpan:
+      </p>
+      <ul>
+        <li><strong>Kunci akses Google Drive</strong> (refresh token) setiap akun yang masuk, <strong>terenkripsi</strong>. Kunci ini hanya dipakai untuk membuka berkas Silsilara di Drive akun tersebut, dan hanya untuk akun yang ia beri akses.</li>
+        <li><strong>Daftar akses</strong> tiap silsilah: email akun pemilik dan akun yang diundang beserta perannya (Admin atau Lihat saja).</li>
+        <li><strong>Nama dan foto profil akun Google</strong>, untuk menampilkan daftar akun yang punya akses.</li>
+        <li><strong>Nama keluarga versi pribadi Anda</strong> yang diisi di Profil (tidak dibagikan ke akun lain).</li>
+      </ul>
+      <p>
+        Isi silsilah dan foto <strong>hanya diteruskan</strong> oleh server saat dibuka atau disimpan, tidak disimpan dan tidak
+        dicatat di server. Sesi masuk berupa token bertanda tangan yang berlaku 30 hari. Server berjalan di layanan Vercel
+        dengan penyimpanan Upstash; penyedia ini dapat memproses data di luar Indonesia.
+      </p>
+
+      <h2>4. Data yang tersimpan di perangkat</h2>
       <p>
         Pengaturan seperti tema terang/gelap, bahasa, silsilah dan data terakhir yang dibuka, langkah panduan memulai yang
-        dilewati, tanda "Ini Anda" untuk akses Lihat saja, serta token masuk sementara.
+        dilewati, tanda "Ini Anda" untuk akses Lihat saja, serta sesi masuk.
         Bila pengingat ulang tahun dinyalakan, daftar nama dan tanggal lahir anggota yang masih hidup disimpan di perangkat
         agar notifikasi bisa muncul tanpa membuka aplikasi. Data ini dihapus saat Anda keluar dari akun atau mematikan pengingat.
       </p>
 
-      <h2>4. Berbagi data</h2>
+      <h2>5. Berbagi data</h2>
       <p>
         Silsilara <strong>tidak menjual, menyewakan, atau membagikan</strong> data Anda kepada pihak ketiga, dan tidak memakai
-        iklan atau analitik. Data hanya dibagikan ke akun Google yang Anda undang sendiri lewat fitur Manajemen akun. Aplikasi
-        berkomunikasi langsung dengan layanan Google (Google Drive, Google Sign-In) dan memuat huruf dari Google Fonts.
-        Tombol WhatsApp di kartu anggota membuka <code>wa.me</code> hanya saat Anda mengetuknya.
+        iklan atau analitik. Data silsilah hanya dapat dibuka oleh akun Google yang diundang lewat fitur Manajemen akun.
+        Penyedia layanan yang dipakai untuk menjalankan Silsilara hanya memproses data untuk keperluan itu: Google (Google Drive,
+        Google Sign-In), Vercel (aplikasi web & server), Upstash (penyimpanan server), serta Google Fonts (huruf).
+        Tombol WhatsApp di kartu anggota dan tombol kirim undangan membuka <code>wa.me</code> hanya saat Anda mengetuknya.
       </p>
       <p>
         Penggunaan dan pemindahan informasi yang diterima dari Google API oleh Silsilara mematuhi
@@ -64,24 +82,36 @@
         termasuk persyaratan Penggunaan Terbatas (Limited Use).
       </p>
 
-      <h2>5. Menghapus data dan mencabut akses</h2>
+      <h2>6. Keamanan</h2>
+      <p>
+        Semua komunikasi memakai HTTPS. Kunci akses Google Drive disimpan terenkripsi, izin Google Drive dibatasi pada berkas
+        buatan Silsilara, dan server memeriksa hak akses setiap permintaan (akun Lihat saja tidak bisa mengubah data).
+      </p>
+
+      <h2>7. Menghapus data dan mencabut akses</h2>
       <ul>
         <li>Hapus satu anggota, atau semua anggota sekaligus lewat <strong>Profil → Reset data</strong>.</li>
-        <li>Hapus folder <em>Silsilara</em> dari Google Drive Anda untuk menghapus seluruh data dan foto.</li>
-        <li>Cabut izin Silsilara kapan saja di <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</li>
+        <li>Cabut akses akun keluarga, atau keluar dari silsilah orang lain, lewat <strong>Profil → Manajemen akun</strong>.</li>
+        <li>Hapus folder <em>Silsilara</em> dari Google Drive Anda untuk menghapus seluruh data silsilah dan foto milik Anda.</li>
+        <li>
+          Cabut izin Silsilara kapan saja di <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.
+          Setelah dicabut, server tidak bisa lagi membuka Google Drive Anda, dan keluarga yang Anda undang tidak bisa membuka
+          silsilah Anda sampai Anda masuk lagi.
+        </li>
+        <li>Minta penghapusan data Anda di server Silsilara (kunci akses, daftar akses, nama keluarga) melalui kontak di bawah.</li>
         <li>Hapus data di perangkat dengan keluar dari akun atau menghapus aplikasi.</li>
       </ul>
 
-      <h2>6. Anak-anak</h2>
+      <h2>8. Anak-anak</h2>
       <p>
         Silsilah keluarga dapat memuat data anggota keluarga yang masih anak-anak. Data tersebut dimasukkan dan dikelola oleh
         anggota keluarga dewasa yang memiliki akses ke silsilah, dan tunduk pada kebijakan yang sama.
       </p>
 
-      <h2>7. Perubahan kebijakan</h2>
+      <h2>9. Perubahan kebijakan</h2>
       <p>Bila kebijakan ini berubah, versi terbaru dan tanggal berlakunya akan diperbarui di halaman ini.</p>
 
-      <h2>8. Kontak</h2>
+      <h2>10. Kontak</h2>
       <p>
         Pengembang: Risyad Abdala Ramadhan ·
         <a href="https://github.com/masrisyad">GitHub</a> ·
