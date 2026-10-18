@@ -12,51 +12,69 @@
     <main>
       <p class="kecil"><a href="./">← Silsilara</a> · <a href="privasi.html" lang="id">Bahasa Indonesia</a></p>
       <h1>Privacy Policy</h1>
-      <p class="kecil">Effective 18 October 2026 · App: Silsilara (Android <code>id.silsilara.app</code> and web)</p>
+      <p class="kecil">Effective 19 October 2026 · App: Silsilara (Android <code>id.silsilara.app</code> and web)</p>
 
       <p>
         This policy explains what data Silsilara accesses, why, and where it is stored. In short:
-        <strong>Silsilara has no server.</strong> Your family tree data is stored only in your Google Drive account
-        (and the family accounts you invite), plus a few settings on your device.
+        <strong>family tree data and photos are stored in the Google Drive of the family tree owner</strong>, not on our server.
+        Silsilara runs a <strong>small server</strong> that connects invited family members to that family tree; the server only
+        keeps the data needed for this (see section 3) and does not store the family tree contents or photos.
       </p>
 
       <h2>1. Data from your Google account</h2>
       <ul>
-        <li><strong>Your Google account name, email address, and profile photo</strong>, to show which account is signed in (also in the list of accounts with access) and to record who last changed the family tree.</li>
+        <li><strong>Name, email address, and Google profile photo</strong>, to show the signed-in account (also in the list of accounts with access) and to record who last changed the family tree.</li>
         <li>
-          <strong>Google Drive access</strong> (scope <code>https://www.googleapis.com/auth/drive</code>), to: create a
-          <em>Silsilara</em> folder containing the <code>silsilah.json</code> file, a photo folder, and the personal settings file
-          <code>pengaturan.json</code> in your Drive; read and update those files; upload family members' photos and move them to the Trash; find family trees that family members share
-          with you; and manage who may open your family tree (the Account management feature).
+          <strong>Limited Google Drive access</strong> (scope <code>https://www.googleapis.com/auth/drive.file</code>): Silsilara can
+          only see and change <strong>files created by Silsilara itself</strong>, namely the <em>Silsilara</em> folder containing
+          the <code>silsilah.json</code> file and a photo folder. This access is used to create, read, and update those files,
+          and to upload family members' photos and move them to the Trash.
         </li>
       </ul>
-      <p>Silsilara only accesses those Silsilara files and does not read, change, or delete any other files in your Drive.</p>
+      <p>Silsilara cannot see, read, change, or delete any other files in your Google Drive.</p>
 
       <h2>2. Data you enter</h2>
       <p>
-        Names, nicknames, gender, dates of birth and death, WhatsApp/phone numbers, photos, and the relationships between family members.
-        When you mark yourself (the "This is you" feature), your Google account email is recorded on that member. All of this data
-        is stored in the <code>silsilah.json</code> file and photo folder in Google Drive, and can be seen by the accounts you give access to.
-      </p>
-      <p>
-        The family name you set in Profile is your personal version: it is stored in the <code>pengaturan.json</code> file
-        in your own Google Drive and is not shared with other accounts.
+        Names, nicknames, gender, dates of birth and death, WhatsApp/phone numbers, photos, and relationships between family
+        members. If you mark yourself (the "This is you" feature), your Google account email is recorded on that member. All of
+        this data is stored in the <code>silsilah.json</code> file and the photo folder in the <strong>Google Drive of the family
+        tree owner</strong>, and can be viewed by accounts given access through the Account management feature. If you are an
+        invited member, the changes you make are saved to the owner's Google Drive.
       </p>
 
-      <h2>3. Data stored on your device</h2>
+      <h2>3. Data stored on the Silsilara server</h2>
       <p>
-        Settings such as light/dark theme, language, the last opened family tree and details, skipped getting-started steps,
-        the "This is you" mark for View only access, and a temporary sign-in token.
-        If birthday reminders are turned on, a list of names and dates of birth of living members is stored on the device
-        so notifications can appear without opening the app. This data is deleted when you sign out or turn off the reminders.
+        So that family members can open the family tree without granting access to their own Google Drive, the Silsilara
+        server opens the Silsilara files in the owner's Google Drive on the owner's behalf, after checking that the requesting
+        account has access. For this, the server stores:
+      </p>
+      <ul>
+        <li><strong>A Google Drive access key</strong> (refresh token) for each signed-in account, <strong>encrypted</strong>. It is only used to open the Silsilara files in that account's Drive, and only for accounts it has given access.</li>
+        <li><strong>The access list</strong> of each family tree: the email of the owner and of invited accounts, with their role (Admin or View only).</li>
+        <li><strong>Google account name and profile photo</strong>, to show the list of accounts with access.</li>
+        <li><strong>Your personal family name</strong> set in Profile (not shared with other accounts).</li>
+      </ul>
+      <p>
+        Family tree contents and photos are <strong>only passed through</strong> the server when opened or saved; they are not
+        stored or logged on the server. Sign-in sessions are signed tokens valid for 30 days. The server runs on Vercel with
+        Upstash storage; these providers may process data outside Indonesia.
       </p>
 
-      <h2>4. Sharing data</h2>
+      <h2>4. Data stored on your device</h2>
       <p>
-        Silsilara <strong>does not sell, rent, or share</strong> your data with third parties, and uses no ads or
-        analytics. Data is only shared with the Google accounts you invite yourself through Account management. The app
-        communicates directly with Google services (Google Drive, Google Sign-In) and loads fonts from Google Fonts.
-        The WhatsApp button on a member's card opens <code>wa.me</code> only when you tap it.
+        Settings such as light/dark theme, language, the last family tree and member opened, skipped getting-started steps,
+        the "This is you" mark for View only access, and the sign-in session.
+        If birthday reminders are turned on, the names and dates of birth of living members are stored on the device so
+        notifications can appear without opening the app. This data is removed when you sign out or turn off reminders.
+      </p>
+
+      <h2>5. Sharing data</h2>
+      <p>
+        Silsilara <strong>does not sell, rent, or share</strong> your data with third parties, and uses no ads or analytics.
+        Family tree data can only be opened by Google accounts invited through Account management. The service providers used
+        to run Silsilara only process data for that purpose: Google (Google Drive, Google Sign-In), Vercel (web app & server),
+        Upstash (server storage), and Google Fonts (fonts).
+        The WhatsApp button on a member card and the invitation button open <code>wa.me</code> only when you tap them.
       </p>
       <p>
         Silsilara's use and transfer of information received from Google APIs adheres to the
@@ -64,24 +82,36 @@
         including the Limited Use requirements.
       </p>
 
-      <h2>5. Deleting data and revoking access</h2>
-      <ul>
-        <li>Delete a single member, or all members at once via <strong>Profile → Reset data</strong>.</li>
-        <li>Delete the <em>Silsilara</em> folder from your Google Drive to remove all data and photos.</li>
-        <li>Revoke Silsilara's permission at any time at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.</li>
-        <li>Delete data on your device by signing out or uninstalling the app.</li>
-      </ul>
-
-      <h2>6. Children</h2>
+      <h2>6. Security</h2>
       <p>
-        A family tree may contain data about family members who are children. That data is entered and managed by
-        adult family members who have access to the family tree, and is subject to the same policy.
+        All communication uses HTTPS. Google Drive access keys are stored encrypted, Google Drive access is limited to files
+        created by Silsilara, and the server checks access on every request (View only accounts cannot change data).
       </p>
 
-      <h2>7. Changes to this policy</h2>
+      <h2>7. Deleting data and revoking access</h2>
+      <ul>
+        <li>Delete a single member, or all members at once via <strong>Profile → Reset data</strong>.</li>
+        <li>Remove family accounts, or leave someone else's family tree, via <strong>Profile → Account management</strong>.</li>
+        <li>Delete the <em>Silsilara</em> folder from your Google Drive to delete all of your family tree data and photos.</li>
+        <li>
+          Revoke Silsilara's access at any time at <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.
+          After that, the server can no longer open your Google Drive, and the family you invited cannot open your family tree
+          until you sign in again.
+        </li>
+        <li>Ask for your data on the Silsilara server (access key, access list, family name) to be deleted via the contact below.</li>
+        <li>Remove data on your device by signing out or uninstalling the app.</li>
+      </ul>
+
+      <h2>8. Children</h2>
+      <p>
+        A family tree may contain data about family members who are children. That data is entered and managed by adult family
+        members who have access to the family tree, and is subject to the same policy.
+      </p>
+
+      <h2>9. Changes to this policy</h2>
       <p>If this policy changes, the latest version and its effective date will be updated on this page.</p>
 
-      <h2>8. Contact</h2>
+      <h2>10. Contact</h2>
       <p>
         Developer: Risyad Abdala Ramadhan ·
         <a href="https://github.com/masrisyad">GitHub</a> ·
