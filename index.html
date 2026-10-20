@@ -3,41 +3,169 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Silsilara — Silsilah Keluarga</title>
-    <meta name="description" content="Silsilara — Telusuri Akar, Hubungkan Generasi. Catat silsilah keluarga bersama; data tersimpan di Google Drive keluarga Anda sendiri." />
+    <title>Silsilara — Unduh Aplikasi Silsilah Keluarga</title>
+    <meta name="description" content="Unduh Silsilara untuk Android (APK terbaru) atau buka versi web. Catat silsilah keluarga bersama; data tersimpan di Google Drive keluarga Anda sendiri." />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="gaya.css" />
+    <meta name="theme-color" content="#f5f2ea" />
+    <script src="tema.js"></script>
+    <!-- Pratinjau saat tautan dibagikan (WhatsApp, Telegram, Facebook, dll.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Silsilara" />
+    <meta property="og:title" content="Unduh Silsilara — Aplikasi Silsilah Keluarga" />
+    <meta property="og:description" content="Telusuri Akar, Hubungkan Generasi. Unduh APK Android terbaru atau buka versi web." />
+    <meta property="og:url" content="https://masrisyad.github.io/silsilara/" />
+    <meta property="og:image" content="https://masrisyad.github.io/silsilara/gambar/pratinjau.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="id_ID" />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <main>
-      <img class="logo" src="favicon.svg" alt="" width="64" height="64" />
-      <h1>Silsilara</h1>
-      <p>Telusuri Akar, Hubungkan Generasi</p>
+      <!-- Info APK di bawah adalah cadangan; skrip memperbaruinya dari api/_lib/versiApk.mjs (aksi "versi-apk"). -->
+      <header class="aplikasi">
+        <img class="ikon-aplikasi" src="favicon.svg" alt="" width="96" height="96" />
+        <div>
+          <h1>Silsilara</h1>
+          <p class="pengembang">Risyad Abdala Ramadhan</p>
+          <p class="slogan">Telusuri Akar, Hubungkan Generasi</p>
+        </div>
+        <button id="tombol-tema" class="tombol-tema" type="button" aria-label="Ganti ke mode gelap" title="Ganti ke mode gelap">
+          <svg class="ikon-bulan" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+          <svg class="ikon-matahari" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </button>
+      </header>
 
-      <div class="kartu">
-        <p>
-          Silsilara adalah aplikasi silsilah keluarga untuk Android dan web. Anda bisa menambahkan anggota keluarga beserta
-          foto, tanggal lahir, dan hubungannya, lalu melihatnya sebagai kartu, daftar generasi, atau diagram pohon keluarga.
-          Silsilah baru dipandu langkah demi langkah: mulai dari diri Anda, lalu orang tua, pasangan, dan anak.
-        </p>
-        <ul>
-          <li><strong>Data milik Anda.</strong> Seluruh data silsilah dan foto disimpan di Google Drive pemilik silsilah, bukan di server kami.</li>
-          <li><strong>Diisi bersama.</strong> Undang anggota keluarga lewat akun Google mereka, dengan hak akses Admin atau Lihat saja.</li>
-          <li><strong>Diagram pohon keluarga.</strong> Cubit untuk memperbesar, muat seluruh pohon ke layar, lalu unduh sebagai gambar atau PDF.</li>
-          <li><strong>Hubungan otomatis.</strong> Sebutan seperti Kakek, Sepupu, Menantu, dan Besan dihitung dari silsilah.</li>
-          <li><strong>Pengingat ulang tahun.</strong> Notifikasi saat ada anggota keluarga yang berulang tahun.</li>
-          <li><strong>Bahasa Indonesia &amp; English</strong>, tema gelap dan terang.</li>
-        </ul>
-        <p>Buka versi web di <a href="https://silsilara.vercel.app">silsilara.vercel.app</a>, atau pasang aplikasi Android (APK) yang dibagikan pengembang.</p>
+      <dl class="statistik">
+        <div><dt>Versi</dt><dd id="info-versi">1.0.0</dd></div>
+        <div><dt>Ukuran</dt><dd id="info-ukuran">3,7 MB</dd></div>
+        <div><dt>Android</dt><dd>5.1+</dd></div>
+        <div><dt>Harga</dt><dd>Gratis</dd></div>
+      </dl>
+
+      <div id="pesan-iphone" class="pemberitahuan" hidden>
+        <strong>Aplikasi Android belum tersedia untuk iPhone/iPad.</strong> Silakan pakai versi web lewat tombol di bawah;
+        isinya sama dan bisa disimpan ke layar utama dari Safari (Bagikan → Tambahkan ke Layar Utama).
       </div>
 
-      <h2>Masuk dengan Google</h2>
-      <p>
-        Silsilara meminta izin akses Google Drive terbatas: hanya berkas yang dibuat Silsilara sendiri, untuk membuat, membaca,
-        dan memperbarui silsilah Anda. Anggota keluarga yang Anda undang membuka silsilah itu lewat server kecil Silsilara,
-        tanpa perlu memberi izin Drive mereka. Penjelasan lengkapnya ada di
-        <a href="privasi.html">Kebijakan Privasi</a>.
-      </p>
+      <div class="unduh">
+        <div class="tombol-unduh">
+          <a id="tombol-apk" class="tombol utama" href="https://drive.google.com/file/d/1Hh8MQob9FURyE4IEnIYITX2PwrefJFdv/view" rel="noopener">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M11 4h2v9.17l3.59-3.58L18 11l-6 6-6-6 1.41-1.41L11 13.17zM5 18h14v2H5z"/></svg>
+            <span>Unduh APK <span id="tombol-versi">1.0.0</span></span>
+          </a>
+          <a id="tombol-web" class="tombol kedua" href="https://silsilara.vercel.app" rel="noopener">Buka versi web</a>
+        </div>
+        <p class="kecil catatan-unduh">
+          Diperbarui <span id="info-tanggal">20 Oktober 2026</span>. APK diunduh dari Google Drive. Bila muncul peringatan
+          pemindaian virus, ketuk <strong>Tetap download</strong> (<em>Download anyway</em>).
+        </p>
+
+        <div id="kartu-qr" class="kartu kartu-qr" hidden>
+          <img src="gambar/qr.svg" alt="Kode QR halaman ini" width="132" height="132" />
+          <div>
+            <strong>Membuka dari komputer?</strong>
+            <p>Pindai kode ini dengan kamera HP Android untuk membuka halaman ini di HP, lalu ketuk Unduh APK.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bagikan">
+        <span class="kecil">Bagikan ke keluarga:</span>
+        <a id="bagikan-wa" class="tombol kecil-tombol" href="https://wa.me/?text=Unduh%20Silsilara%2C%20aplikasi%20silsilah%20keluarga%3A%20https%3A%2F%2Fmasrisyad.github.io%2Fsilsilara%2F" rel="noopener">WhatsApp</a>
+        <button id="bagikan-salin" class="tombol kecil-tombol" type="button">Salin tautan</button>
+        <span id="bagikan-status" class="kecil" role="status"></span>
+      </div>
+
+      <section aria-labelledby="judul-layar">
+        <h2 id="judul-layar">Tampilan aplikasi</h2>
+        <div class="layar">
+          <img src="gambar/1-beranda.webp" alt="Beranda: jumlah anggota, ulang tahun terdekat, anggota tertua dan termuda" width="270" height="584" loading="lazy" />
+          <img src="gambar/4-diagram.webp" alt="Diagram pohon keluarga tiga generasi" width="270" height="584" loading="lazy" />
+          <img src="gambar/2-data.webp" alt="Data anggota dengan sebutan hubungan otomatis: pasangan, anak, cucu, menantu" width="270" height="584" loading="lazy" />
+          <img src="gambar/3-generasi.webp" alt="Daftar anggota per generasi" width="270" height="584" loading="lazy" />
+        </div>
+        <p class="kecil">Contoh di atas memakai data keluarga fiktif.</p>
+      </section>
+
+      <section id="bagian-baru" aria-labelledby="judul-baru" hidden>
+        <h2 id="judul-baru">Apa yang baru</h2>
+        <p id="info-catatan"></p>
+      </section>
+
+      <section aria-labelledby="judul-pasang">
+        <h2 id="judul-pasang">Cara memasang di HP Android</h2>
+        <ol class="langkah">
+          <li>Ketuk <strong>Unduh APK</strong> di atas. Google Drive terbuka; ketuk tombol unduh, lalu <strong>Tetap download</strong> bila diminta.</li>
+          <li>Setelah selesai, buka berkas <strong>Silsilara-<span class="versi-teks">1.0.0</span>.apk</strong> dari notifikasi unduhan atau dari aplikasi <em>File</em> → <em>Download</em>.</li>
+          <li>Bila muncul pesan bahwa HP tidak diizinkan memasang aplikasi dari sumber ini, ketuk <strong>Setelan</strong>, nyalakan <strong>Izinkan dari sumber ini</strong>, lalu kembali.</li>
+          <li>Ketuk <strong>Instal</strong>. Bila Google Play Protect memberi peringatan, ketuk <strong>Detail lainnya</strong> → <strong>Tetap instal</strong>. Peringatan ini muncul karena Silsilara tidak dipasang lewat Play Store.</li>
+          <li>Buka Silsilara dan ketuk <strong>Masuk dengan Google</strong>.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="judul-perbarui">
+        <h2 id="judul-perbarui">Cara memperbarui</h2>
+        <p>
+          Saat ada versi baru, Silsilara menampilkan pemberitahuan dengan tombol <strong>Unduh</strong>. Anda juga bisa kembali ke
+          halaman ini kapan saja. Pasang APK baru langsung di atas versi lama, <strong>tidak perlu menghapus aplikasi</strong>.
+          Data silsilah tetap aman karena tersimpan di Google Drive.
+        </p>
+      </section>
+
+      <section aria-labelledby="judul-tentang">
+        <h2 id="judul-tentang">Tentang aplikasi</h2>
+        <div class="kartu">
+          <p>
+            Silsilara adalah aplikasi silsilah keluarga untuk Android dan web. Anda bisa menambahkan anggota keluarga beserta
+            foto, tanggal lahir, dan hubungannya, lalu melihatnya sebagai kartu, daftar generasi, atau diagram pohon keluarga.
+            Silsilah baru dipandu langkah demi langkah: mulai dari diri Anda, lalu orang tua, pasangan, dan anak.
+          </p>
+          <ul>
+            <li><strong>Data milik Anda.</strong> Seluruh data silsilah dan foto disimpan di Google Drive pemilik silsilah, bukan di server kami.</li>
+            <li><strong>Diisi bersama.</strong> Undang anggota keluarga lewat akun Google mereka, dengan hak akses Admin atau Lihat saja.</li>
+            <li><strong>Diagram pohon keluarga.</strong> Cubit untuk memperbesar, muat seluruh pohon ke layar, lalu unduh sebagai gambar atau PDF.</li>
+            <li><strong>Hubungan otomatis.</strong> Sebutan seperti Kakek, Sepupu, Menantu, dan Besan dihitung dari silsilah.</li>
+            <li><strong>Pengingat ulang tahun.</strong> Notifikasi saat ada anggota keluarga yang berulang tahun.</li>
+            <li><strong>Bahasa Indonesia &amp; English</strong>, tema gelap dan terang.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section aria-labelledby="judul-tanya">
+        <h2 id="judul-tanya">Pertanyaan umum</h2>
+        <details>
+          <summary>Kenapa Silsilara tidak ada di Play Store?</summary>
+          <p>Untuk saat ini Silsilara dibagikan langsung sebagai berkas APK lewat halaman ini. Halaman ini selalu berisi versi terbaru, jadi cukup bagikan tautan ini ke keluarga.</p>
+        </details>
+        <details>
+          <summary>Apakah aman dipasang?</summary>
+          <p>APK di halaman ini ditandatangani dengan kunci resmi Silsilara, jadi pembaruan hanya bisa dipasang di atas aplikasi asli. Unduh hanya dari halaman ini, jangan dari berkas yang diteruskan orang lain.</p>
+        </details>
+        <details>
+          <summary>Apakah data saya hilang saat memperbarui?</summary>
+          <p>Tidak. Pasang versi baru di atas versi lama. Data silsilah dan foto ada di Google Drive, bukan di HP.</p>
+        </details>
+        <details>
+          <summary>Saya memakai iPhone atau laptop.</summary>
+          <p>Gunakan <a href="https://silsilara.vercel.app">versi web</a> dengan akun Google yang sama. Isinya sama dengan aplikasi Android.</p>
+        </details>
+        <details>
+          <summary>Pemasangan diblokir atau gagal.</summary>
+          <p>Pastikan izin <em>Instal aplikasi tidak dikenal</em> sudah dinyalakan untuk aplikasi yang membuka APK (Chrome, Drive, atau File). Bila muncul "Aplikasi tidak terpasang" karena versinya bentrok, hapus dulu Silsilara versi uji coba lalu pasang ulang; data di Google Drive tetap aman.</p>
+        </details>
+      </section>
+
+      <section aria-labelledby="judul-masuk">
+        <h2 id="judul-masuk">Masuk dengan Google</h2>
+        <p>
+          Silsilara meminta izin akses Google Drive terbatas: hanya berkas yang dibuat Silsilara sendiri, untuk membuat, membaca,
+          dan memperbarui silsilah Anda. Anggota keluarga yang Anda undang membuka silsilah itu lewat server kecil Silsilara,
+          tanpa perlu memberi izin Drive mereka. Penjelasan lengkapnya ada di
+          <a href="privasi.html">Kebijakan Privasi</a>.
+        </p>
+      </section>
 
       <footer>
         © 2026 Risyad Abdala Ramadhan. Hak cipta dilindungi. ·
@@ -47,5 +175,70 @@
         <a href="https://www.linkedin.com/in/risyadabdalaramadhan/">LinkedIn</a>
       </footer>
     </main>
+
+    <script>
+      const TAUTAN_HALAMAN = 'https://masrisyad.github.io/silsilara/'
+      const API_VERSI = 'https://silsilara.vercel.app/api/silsilara?aksi=versi-apk'
+      const $ = (id) => document.getElementById(id)
+
+      // Info APK terbaru dari server yang sama dengan peringatan pembaruan di aplikasi.
+      function tampilkanVersi(info) {
+        if (!info || !/^https:\/\//.test(info.url || '')) return
+        const versi = String(info.versionName || info.versionCode || '')
+        if (versi) {
+          $('info-versi').textContent = versi
+          $('tombol-versi').textContent = versi
+          document.querySelectorAll('.versi-teks').forEach((el) => (el.textContent = versi))
+        }
+        if (info.ukuran) $('info-ukuran').textContent = info.ukuran
+        if (/^\d{4}-\d{2}-\d{2}$/.test(info.tanggal || '')) {
+          const tgl = new Date(info.tanggal + 'T00:00:00')
+          $('info-tanggal').textContent = tgl.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+        }
+        $('tombol-apk').href = info.url
+        const catatan = info.catatan?.id || ''
+        if (catatan) {
+          $('info-catatan').textContent = catatan
+          $('bagian-baru').hidden = false
+        }
+      }
+      fetch(API_VERSI, { cache: 'no-store' })
+        .then((r) => (r.ok ? r.json() : null))
+        .then(tampilkanVersi)
+        .catch(() => {}) // tetap pakai info cadangan di HTML
+
+      // Menyesuaikan perangkat: iPhone/iPad → versi web jadi tombol utama; komputer → kode QR untuk HP.
+      const ua = navigator.userAgent
+      const iphone = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)
+      const android = /Android/i.test(ua)
+      if (iphone) {
+        $('pesan-iphone').hidden = false
+        $('tombol-apk').classList.replace('utama', 'kedua')
+        $('tombol-web').classList.replace('kedua', 'utama')
+        $('tombol-web').parentElement.prepend($('tombol-web'))
+      } else if (!android) {
+        $('kartu-qr').hidden = false
+      }
+
+      // Bagikan: lembar bagikan bawaan HP bila ada, selain itu salin tautan.
+      const pesanBagikan = 'Unduh Silsilara, aplikasi silsilah keluarga:'
+      $('bagikan-salin').addEventListener('click', async () => {
+        if (navigator.share && (android || iphone)) {
+          try {
+            await navigator.share({ title: 'Silsilara', text: pesanBagikan, url: TAUTAN_HALAMAN })
+            return
+          } catch (err) {
+            if (err?.name === 'AbortError') return
+          }
+        }
+        try {
+          await navigator.clipboard.writeText(TAUTAN_HALAMAN)
+          $('bagikan-status').textContent = 'Tautan disalin.'
+        } catch {
+          $('bagikan-status').textContent = TAUTAN_HALAMAN
+        }
+      })
+      if (navigator.share && (android || iphone)) $('bagikan-salin').textContent = 'Bagikan lainnya'
+    </script>
   </body>
 </html>
