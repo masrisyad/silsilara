@@ -1,5 +1,16 @@
-/* Halaman informasi Silsilara (beranda & kebijakan privasi) — warna sama dengan aplikasi. */
+/* Halaman informasi Silsilara (beranda & kebijakan privasi) — warna sama dengan aplikasi.
+   Bawaan mode terang; mode gelap lewat tombol tema (tema.js menyetel data-tema="gelap" di <html>). */
 :root {
+  color-scheme: light;
+  --latar: #f5f2ea;
+  --panel: #ffffff;
+  --garis: rgb(24 24 27 / 0.08);
+  --teks: #18181b;
+  --redup: #52525b;
+  --aksen: #1c6a5b;
+  --teks-aksen: #ffffff; /* teks di atas tombol beraksen */
+}
+:root[data-tema='gelap'] {
   color-scheme: dark;
   --latar: #0a0f0e;
   --panel: rgb(255 255 255 / 0.04);
@@ -7,17 +18,7 @@
   --teks: #f4f4f5;
   --redup: #a1a1aa;
   --aksen: #f2b544;
-}
-@media (prefers-color-scheme: light) {
-  :root {
-    color-scheme: light;
-    --latar: #f5f2ea;
-    --panel: #ffffff;
-    --garis: rgb(24 24 27 / 0.08);
-    --teks: #18181b;
-    --redup: #52525b;
-    --aksen: #1c6a5b;
-  }
+  --teks-aksen: #18181b;
 }
 * {
   box-sizing: border-box;
@@ -70,6 +71,207 @@ ul {
 }
 .kecil {
   font-size: 0.85rem;
+}
+
+/* Beranda = halaman unduhan (index.html), tata letak mirip halaman aplikasi di toko aplikasi. */
+.aplikasi {
+  position: relative;
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  padding-right: 3.25rem; /* ruang tombol tema */
+}
+.tombol-tema {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--garis);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--teks);
+  cursor: pointer;
+}
+.tombol-tema:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--aksen) 50%, transparent);
+  outline-offset: 2px;
+}
+.tombol-tema .ikon-matahari,
+:root[data-tema='gelap'] .tombol-tema .ikon-bulan {
+  display: none;
+}
+:root[data-tema='gelap'] .tombol-tema .ikon-matahari {
+  display: block;
+}
+.ikon-aplikasi {
+  width: 6rem;
+  height: 6rem;
+  flex: none;
+  border-radius: 1.4rem;
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.18);
+}
+.aplikasi h1 {
+  margin: 0;
+}
+.aplikasi p {
+  margin: 0;
+}
+.pengembang {
+  color: var(--aksen) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.slogan {
+  font-size: 0.95rem;
+}
+.statistik {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 1.5rem 0 0;
+  padding: 0.75rem 0;
+  border-block: 1px solid var(--garis);
+  text-align: center;
+}
+.statistik div + div {
+  border-left: 1px solid var(--garis);
+}
+.statistik dt {
+  font-size: 0.75rem;
+  color: var(--redup);
+}
+.statistik dd {
+  margin: 0;
+  font-weight: 700;
+}
+.pemberitahuan {
+  margin-top: 1.25rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--aksen) 14%, transparent);
+  color: var(--teks);
+  font-size: 0.95rem;
+}
+.unduh {
+  margin-top: 1.5rem;
+}
+.tombol-unduh {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.tombol {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0 1.5rem;
+  border: 1px solid var(--garis);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--teks);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.tombol.utama {
+  flex: 1 1 14rem;
+  border-color: transparent;
+  background: var(--aksen);
+  color: var(--teks-aksen);
+  font-size: 1.05rem;
+}
+.tombol.kedua {
+  flex: 1 1 10rem;
+}
+.tombol:hover {
+  filter: brightness(1.06);
+}
+.tombol:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--aksen) 50%, transparent);
+  outline-offset: 2px;
+}
+.catatan-unduh {
+  margin: 0.75rem 0 0;
+}
+.kartu-qr {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+.kartu-qr[hidden],
+.pemberitahuan[hidden] {
+  display: none;
+}
+.kartu-qr img {
+  flex: none;
+  border-radius: 0.5rem;
+  background: #fff;
+  padding: 0.4rem;
+}
+.kartu-qr p {
+  margin: 0.25rem 0 0;
+}
+.bagikan {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 1.25rem;
+  color: var(--redup);
+}
+.kecil-tombol {
+  min-height: 2.25rem;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+}
+.layar {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 0.5rem;
+}
+.layar img {
+  flex: none;
+  width: 11.25rem;
+  height: auto;
+  aspect-ratio: 390 / 844;
+  border: 1px solid var(--garis);
+  border-radius: 1rem;
+  scroll-snap-align: start;
+}
+.langkah li {
+  margin-bottom: 0.5rem;
+}
+details {
+  border-bottom: 1px solid var(--garis);
+  padding: 0.6rem 0;
+}
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+details p {
+  margin: 0.5rem 0 0.25rem;
+}
+@media (max-width: 30rem) {
+  .ikon-aplikasi {
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 1.05rem;
+  }
+  .aplikasi h1 {
+    font-size: 1.6rem;
+  }
+  .kartu-qr {
+    flex-direction: column;
+    text-align: center;
+  }
 }
 footer {
   margin-top: 3rem;
