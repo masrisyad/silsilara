@@ -40,15 +40,15 @@
       <!-- Tampil bila dibuka dari browser bawaan Instagram/Facebook/TikTok: unduhan & login Google sering gagal di sana. -->
       <div id="pesan-aplikasi" class="pemberitahuan" role="alert" hidden>
         <strong>Anda membuka halaman ini dari <span id="nama-aplikasi">aplikasi lain</span>.</strong>
-        Unduhan dan login Google bisa gagal di sini. Buka halaman ini di browser HP Anda dulu.
-        <p id="petunjuk-menu" class="kecil">
-          Ketuk ikon <strong>⋯</strong> atau <strong>⋮</strong> di pojok kanan atas, lalu pilih <strong>Buka di browser</strong>
-          (atau <strong>Buka di Safari / Chrome</strong>). Bisa juga salin tautan lalu tempel di browser.
-        </p>
+        Unduhan dan login Google bisa gagal di sini, jadi buka halaman ini di browser dulu.
         <div class="tombol-unduh">
           <a id="tombol-buka-browser" class="tombol utama" href="https://unduh.silsilara.com/" hidden>Buka di browser</a>
           <button id="salin-aplikasi" class="tombol kedua" type="button">Salin tautan</button>
         </div>
+        <!-- Teks petunjuk diisi skrip sesuai perangkat (Android / iPhone & iPad). -->
+        <p id="petunjuk-menu" class="kecil">
+          Atau buka menu aplikasi ini, lalu pilih Buka di browser. Bisa juga salin tautan lalu tempel di browser.
+        </p>
       </div>
 
       <dl class="statistik">
@@ -59,7 +59,7 @@
       </dl>
 
       <div id="pesan-iphone" class="pemberitahuan" hidden>
-        <strong>Aplikasi Android belum tersedia untuk iPhone/iPad.</strong> Silakan pakai versi web lewat tombol di bawah;
+        <strong>Aplikasi iOS belum tersedia untuk iPhone/iPad.</strong> Silakan pakai versi web lewat tombol di bawah;
         isinya sama dan bisa disimpan ke layar utama dari Safari (Bagikan → Tambahkan ke Layar Utama).
       </div>
 
@@ -248,16 +248,28 @@
             $('salin-aplikasi').textContent = TAUTAN_HALAMAN
           }
         })
+        const alamat = `${location.host}${location.pathname}${location.search}`
         if (android) {
           // Intent tanpa package= → browser default HP (Chrome, Firefox, Opera, dll.), bukan dipaksa ke Chrome.
-          const intent = `intent://${location.host}${location.pathname}${location.search}#Intent;scheme=https;end`
+          const intent = `intent://${alamat}#Intent;scheme=https;end`
           $('tombol-buka-browser').href = intent
           $('tombol-buka-browser').hidden = false
+          $('petunjuk-menu').textContent =
+            'Bila tidak pindah otomatis, ketuk tombol di atas, atau ketuk ⋮ di pojok kanan atas lalu pilih Buka di browser.'
           location.href = intent // coba otomatis; bila diabaikan aplikasinya, tombol di atas tetap ada
+        } else if (iphone) {
+          // iOS tidak punya intent seperti Android. Skema x-safari-https:// (iOS 17+) membuka Safari, tapi tidak resmi
+          // didokumentasikan Apple dan bisa diabaikan aplikasinya — karena itu hanya lewat ketukan, dengan petunjuk cadangan.
+          $('tombol-buka-browser').href = `x-safari-https://${alamat}`
+          $('tombol-buka-browser').textContent = 'Buka di Safari'
+          $('tombol-buka-browser').hidden = false
+          $('petunjuk-menu').textContent =
+            'Bila tombol di atas tidak bekerja, ketuk ikon kompas di bawah layar (atau ⋯ di pojok kanan atas lalu pilih Buka di browser).'
         }
       }
       if (iphone) {
-        $('pesan-iphone').hidden = false
+        // Di dalam aplikasi cukup satu kotak (buka di browser); pesan iPhone tampil setelah halaman dibuka di Safari.
+        $('pesan-iphone').hidden = Boolean(aplikasi)
         $('tombol-apk').classList.replace('utama', 'kedua')
         $('tombol-web').classList.replace('kedua', 'utama')
         $('tombol-web').parentElement.prepend($('tombol-web'))
