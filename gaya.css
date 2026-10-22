@@ -214,6 +214,14 @@ ul {
 #pesan-aplikasi .tombol-unduh {
   margin-top: 0.75rem;
 }
+#pesan-aplikasi .ikon-kompas {
+  vertical-align: -0.2em;
+}
+/* iPhone/iPad: petunjuk kompas adalah langkah utama (tidak ada tombol), jadi tidak diredupkan. */
+#petunjuk-menu:not(.kecil) {
+  margin: 0.75rem 0 0;
+  color: var(--teks);
+}
 .kartu-qr img {
   flex: none;
   border-radius: 0.5rem;
