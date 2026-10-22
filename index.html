@@ -259,12 +259,10 @@
           location.href = intent // coba otomatis; bila diabaikan aplikasinya, tombol di atas tetap ada
         } else if (iphone) {
           // iOS tidak punya intent seperti Android, dan Instagram mengabaikan x-safari-https:// (diuji 22 Okt 2026 di iPad),
-          // jadi halaman tidak bisa membuka Safari sendiri. Petunjuk tombol kompas Instagram jadi langkah utama.
+          // jadi halaman tidak bisa membuka Safari sendiri. Petunjuk menu titik tiga jadi langkah utama.
           const petunjuk = $('petunjuk-menu')
           petunjuk.classList.remove('kecil')
-          petunjuk.innerHTML =
-            'Ketuk ikon kompas <svg class="ikon-kompas" aria-label="kompas" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg> ' +
-            'di bagian bawah layar untuk membuka halaman ini di Safari. Bila tidak ada, ketuk <strong>⋯</strong> di pojok kanan atas lalu pilih <strong>Buka di browser</strong>.'
+          petunjuk.innerHTML = 'Ketuk ikon titik tiga <strong>(⋯)</strong>, lalu pilih <strong>Buka di browser eksternal</strong>.'
           $('salin-aplikasi').parentElement.before(petunjuk)
         }
       }
