@@ -37,6 +37,20 @@
         </button>
       </header>
 
+      <!-- Tampil bila dibuka dari browser bawaan Instagram/Facebook/TikTok: unduhan & login Google sering gagal di sana. -->
+      <div id="pesan-aplikasi" class="pemberitahuan" role="alert" hidden>
+        <strong>Anda membuka halaman ini dari <span id="nama-aplikasi">aplikasi lain</span>.</strong>
+        Unduhan dan login Google bisa gagal di sini. Buka halaman ini di browser HP Anda dulu.
+        <p id="petunjuk-menu" class="kecil">
+          Ketuk ikon <strong>⋯</strong> atau <strong>⋮</strong> di pojok kanan atas, lalu pilih <strong>Buka di browser</strong>
+          (atau <strong>Buka di Safari / Chrome</strong>). Bisa juga salin tautan lalu tempel di browser.
+        </p>
+        <div class="tombol-unduh">
+          <a id="tombol-buka-browser" class="tombol utama" href="https://unduh.silsilara.com/" hidden>Buka di browser</a>
+          <button id="salin-aplikasi" class="tombol kedua" type="button">Salin tautan</button>
+        </div>
+      </div>
+
       <dl class="statistik">
         <div><dt>Versi</dt><dd id="info-versi">1.0.0</dd></div>
         <div><dt>Ukuran</dt><dd id="info-ukuran">3,7 MB</dd></div>
@@ -211,6 +225,37 @@
       const ua = navigator.userAgent
       const iphone = /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)
       const android = /Android/i.test(ua)
+
+      // Browser bawaan aplikasi (daftar sama dengan src/lib/browserAplikasi.js). WhatsApp & Telegram tidak termasuk:
+      // keduanya membuka tautan lewat Chrome Custom Tabs / Safari, tempat unduhan & login Google berjalan normal.
+      const APLIKASI = [
+        ['Instagram', /Instagram/],
+        ['Threads', /Barcelona/],
+        ['Facebook', /FBAN|FBAV|FB_IAB|FBIOS/],
+        ['TikTok', /musical_ly|BytedanceWebview|TikTok/i],
+        ['LINE', /\bLine\//],
+        ['LinkedIn', /LinkedInApp/],
+      ]
+      const aplikasi = APLIKASI.find(([, pola]) => pola.test(ua))?.[0]
+      if (aplikasi) {
+        $('nama-aplikasi').textContent = aplikasi
+        $('pesan-aplikasi').hidden = false
+        $('salin-aplikasi').addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(TAUTAN_HALAMAN)
+            $('salin-aplikasi').textContent = 'Tautan disalin'
+          } catch {
+            $('salin-aplikasi').textContent = TAUTAN_HALAMAN
+          }
+        })
+        if (android) {
+          // Intent tanpa package= → browser default HP (Chrome, Firefox, Opera, dll.), bukan dipaksa ke Chrome.
+          const intent = `intent://${location.host}${location.pathname}${location.search}#Intent;scheme=https;end`
+          $('tombol-buka-browser').href = intent
+          $('tombol-buka-browser').hidden = false
+          location.href = intent // coba otomatis; bila diabaikan aplikasinya, tombol di atas tetap ada
+        }
+      }
       if (iphone) {
         $('pesan-iphone').hidden = false
         $('tombol-apk').classList.replace('utama', 'kedua')

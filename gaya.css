@@ -204,8 +204,15 @@ ul {
   align-items: center;
 }
 .kartu-qr[hidden],
-.pemberitahuan[hidden] {
+.pemberitahuan[hidden],
+.tombol[hidden] {
   display: none;
+}
+#pesan-aplikasi {
+  border: 1px solid color-mix(in srgb, var(--aksen) 45%, transparent);
+}
+#pesan-aplikasi .tombol-unduh {
+  margin-top: 0.75rem;
 }
 .kartu-qr img {
   flex: none;
