@@ -69,7 +69,7 @@
             <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M11 4h2v9.17l3.59-3.58L18 11l-6 6-6-6 1.41-1.41L11 13.17zM5 18h14v2H5z"/></svg>
             <span>Unduh APK <span id="tombol-versi">1.0.1</span></span>
           </a>
-          <a id="tombol-web" class="tombol kedua" href="https://silsilara.com" rel="noopener">Buka versi web</a>
+          <a id="tombol-web" class="tombol kedua" href="https://silsilara.com/?dari=unduh" rel="noopener">Buka versi web</a>
         </div>
         <p class="kecil catatan-unduh">
           Diperbarui <span id="info-tanggal">23 Oktober 2026</span>. APK diunduh dari Google Drive. Bila muncul peringatan
@@ -163,7 +163,7 @@
         </details>
         <details>
           <summary>Saya memakai iPhone atau laptop.</summary>
-          <p>Gunakan <a href="https://silsilara.com">versi web</a> dengan akun Google yang sama. Isinya sama dengan aplikasi Android.</p>
+          <p>Gunakan <a id="tautan-web-faq" href="https://silsilara.com/?dari=unduh">versi web</a> dengan akun Google yang sama. Isinya sama dengan aplikasi Android.</p>
         </details>
         <details>
           <summary>Pemasangan diblokir atau gagal.</summary>
@@ -295,6 +295,45 @@
         }
       })
       if (navigator.share && (android || iphone)) $('bagikan-salin').textContent = 'Bagikan lainnya'
+
+      // Analitik PostHog (proyek yang sama dengan aplikasi, lihat src/lib/analitik.js). Hanya 3 event, tanpa autocapture
+      // & rekaman sesi. Sengaja tidak memakai $pageview agar kunjungan di sini tidak ikut terhitung sebagai "Pengunjung"
+      // aplikasi di dashboard. Situs ini di GitHub Pages (tanpa proxy /sinyal) → kirim langsung ke PostHog EU.
+      // Di luar unduh.silsilara.com (pratinjau lokal) event hanya ditulis ke konsol.
+      const POSTHOG_KEY = 'phc_rCBHGXyPmb8PmgSXENEXs73dmfuGwU69NmgnUoFEh5D8'
+      const ANALITIK = location.hostname === 'unduh.silsilara.com'
+      const antreanAnalitik = []
+      const lacak = (event, props = {}) => {
+        if (!ANALITIK) return console.info('[analitik]', event, props)
+        if (window.posthog?.__loaded) window.posthog.capture(event, props, { transport: 'sendBeacon' })
+        else antreanAnalitik.push([event, props])
+      }
+      if (ANALITIK) {
+        const skrip = document.createElement('script')
+        skrip.src = 'https://cdn.jsdelivr.net/npm/posthog-js@1.436.1/dist/array.full.no-external.js'
+        skrip.async = true
+        skrip.onload = () => {
+          window.posthog.init(POSTHOG_KEY, {
+            api_host: 'https://eu.i.posthog.com',
+            defaults: '2026-08-30',
+            person_profiles: 'identified_only',
+            persistence: 'localStorage', // tanpa cookie
+            autocapture: false,
+            capture_pageview: false,
+            capture_pageleave: false,
+            disable_session_recording: true,
+            disable_surveys: true,
+          })
+          window.posthog.register({ platform: 'Halaman unduh', browser_aplikasi: aplikasi || null })
+          antreanAnalitik.splice(0).forEach(([event, props]) => window.posthog.capture(event, props))
+        }
+        document.head.append(skrip)
+      }
+      const perangkat = iphone ? 'iPhone/iPad' : android ? 'Android' : 'Komputer'
+      lacak('buka_halaman_unduh', { perangkat })
+      $('tombol-apk').addEventListener('click', () => lacak('klik_unduh_apk', { perangkat, versi: $('tombol-versi').textContent }))
+      $('tombol-web').addEventListener('click', () => lacak('klik_buka_web', { perangkat, posisi: 'tombol' }))
+      $('tautan-web-faq').addEventListener('click', () => lacak('klik_buka_web', { perangkat, posisi: 'faq' }))
     </script>
   </body>
 </html>
