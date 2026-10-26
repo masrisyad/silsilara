@@ -1,0 +1,29 @@
+# Silsilara
+
+> Silsilara adalah aplikasi silsilah keluarga gratis berbahasa Indonesia untuk Android dan web. Pengguna menambahkan anggota keluarga beserta foto, tanggal lahir, dan hubungannya, lalu melihatnya sebagai kartu, daftar generasi, atau diagram pohon keluarga. Silsilah diisi bersama keluarga, dan data silsilah serta foto tersimpan di Google Drive pemilik silsilah sendiri, bukan di server Silsilara.
+
+English: Silsilara is a free, Indonesian-language family tree app for Android and the web. Families build the tree together, and the tree data and photos are stored in the owner's own Google Drive.
+
+Halaman ini (unduh.silsilara.com) adalah halaman resmi untuk mengunduh APK Android Silsilara.
+
+- Harga: gratis
+- Platform: Android 5.1+ (APK dari halaman ini, belum ada di Play Store) dan web di https://silsilara.com (juga untuk iPhone, iPad, dan laptop)
+- Bahasa: Indonesia dan English
+- Masuk dengan akun Google
+- Pengembang: Risyad Abdala Ramadhan
+
+## Fitur
+
+- Data silsilah dan foto tersimpan di Google Drive pemilik silsilah
+- Diisi bersama keluarga dengan hak akses Admin atau Lihat saja
+- Diagram pohon keluarga yang bisa diunduh sebagai gambar atau PDF
+- Sebutan hubungan otomatis seperti Kakek, Sepupu, Menantu, dan Besan
+- Pengingat ulang tahun anggota keluarga
+- Tema gelap dan terang
+
+## Halaman
+
+- [Unduh Silsilara](https://unduh.silsilara.com/): APK Android terbaru, cara memasang dan memperbarui, pertanyaan umum
+- [Versi web](https://silsilara.com/): aplikasi lengkap di browser
+- [Kebijakan Privasi](https://unduh.silsilara.com/privasi.html): data apa yang diakses, di mana disimpan, dan cara menghapusnya ([English](https://unduh.silsilara.com/privacy.html))
+- [Syarat & Ketentuan](https://unduh.silsilara.com/syarat.html) ([English](https://unduh.silsilara.com/terms.html))
