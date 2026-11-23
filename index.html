@@ -136,7 +136,7 @@
       </div>
 
       <dl class="statistik">
-        <div><dt>Versi</dt><dd id="info-versi">1.0.1</dd></div>
+        <div><dt>Versi</dt><dd id="info-versi">1.0.7</dd></div>
         <div><dt>Ukuran</dt><dd id="info-ukuran">3,7 MB</dd></div>
         <div><dt>Android</dt><dd>5.1+</dd></div>
         <div><dt>Harga</dt><dd>Gratis</dd></div>
@@ -151,12 +151,12 @@
         <div class="tombol-unduh">
           <a id="tombol-apk" class="tombol utama" href="https://drive.google.com/file/d/1Hh8MQob9FURyE4IEnIYITX2PwrefJFdv/view" rel="noopener">
             <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M11 4h2v9.17l3.59-3.58L18 11l-6 6-6-6 1.41-1.41L11 13.17zM5 18h14v2H5z"/></svg>
-            <span>Unduh APK <span id="tombol-versi">1.0.1</span></span>
+            <span>Unduh APK <span id="tombol-versi">1.0.7</span></span>
           </a>
           <a id="tombol-web" class="tombol kedua" href="https://silsilara.com" rel="noopener">Buka versi web</a>
         </div>
         <p class="kecil catatan-unduh">
-          Diperbarui <span id="info-tanggal">23 Oktober 2026</span>. APK diunduh dari Google Drive. Bila muncul peringatan
+          Diperbarui <span id="info-tanggal">23 November 2026</span>. APK diunduh dari Google Drive. Bila muncul peringatan
           pemindaian virus, ketuk <strong>Tetap download</strong> (<em>Download anyway</em>).
         </p>
 
@@ -190,13 +190,14 @@
       <section id="bagian-baru" aria-labelledby="judul-baru" hidden>
         <h2 id="judul-baru">Apa yang baru</h2>
         <p id="info-catatan"></p>
+        <ul id="info-poin" class="poin-baru" hidden></ul>
       </section>
 
       <section aria-labelledby="judul-pasang">
         <h2 id="judul-pasang">Cara memasang di HP Android</h2>
         <ol class="langkah">
           <li>Ketuk <strong>Unduh APK</strong> di atas. Google Drive terbuka; ketuk tombol unduh, lalu <strong>Tetap download</strong> bila diminta.</li>
-          <li>Setelah selesai, buka berkas <strong>Silsilara-<span class="versi-teks">1.0.1</span>.apk</strong> dari notifikasi unduhan atau dari aplikasi <em>File</em> → <em>Download</em>.</li>
+          <li>Setelah selesai, buka berkas <strong>Silsilara-<span class="versi-teks">1.0.7</span>.apk</strong> dari notifikasi unduhan atau dari aplikasi <em>File</em> → <em>Download</em>.</li>
           <li>Bila muncul pesan bahwa HP tidak diizinkan memasang aplikasi dari sumber ini, ketuk <strong>Setelan</strong>, nyalakan <strong>Izinkan dari sumber ini</strong>, lalu kembali.</li>
           <li>Ketuk <strong>Instal</strong>. Bila Google Play Protect memberi peringatan, ketuk <strong>Detail lainnya</strong> → <strong>Tetap instal</strong>. Peringatan ini muncul karena Silsilara tidak dipasang lewat Play Store.</li>
           <li>Buka Silsilara dan ketuk <strong>Masuk dengan Google</strong>.</li>
@@ -297,6 +298,13 @@
         const catatan = info.catatan?.id || ''
         if (catatan) {
           $('info-catatan').textContent = catatan
+          $('bagian-baru').hidden = false
+        }
+        // Daftar perubahan (sejak 1.0.7); teks dari server dipasang sebagai teks biasa, bukan HTML.
+        const poin = Array.isArray(info.poin?.id) ? info.poin.id.filter((p) => typeof p === 'string' && p.trim()).slice(0, 6) : []
+        if (poin.length) {
+          $('info-poin').replaceChildren(...poin.map((p) => Object.assign(document.createElement('li'), { textContent: p })))
+          $('info-poin').hidden = false
           $('bagian-baru').hidden = false
         }
       }
